@@ -1,0 +1,10 @@
+0lfgutierrezg@unal.educ.co;A0000;0unal;0Estudiante;0Felipe;Sanchez;0000000000
+1lfgutierrezg@unal.educ.co;A1111;1unal;1Estudiante;1Felipe;Cortes;0000000001
+2lfgutierrezg@unal.educ.co;A2222;2unal;2Estudiante;2Felipe;Garnica;0000000002
+3lfgutierrezg@unal.educ.co;A3333;3unal;3Estudiante;3Felipe;Gutierrez;0000000003
+4lfgutierrezg@unal.educ.co;A4444;4unal;4Estudiante;4Felipe;Ramirez;0000000004
+5lfgutierrezg@unal.educ.co;A5555;5unal;5Estudiante;5Felipe;Hernandez;0000000005
+6lfgutierrezg@unal.educ.co;A6666;6unal;6Estudiante;6Felipe;Corredor;0000000006
+7lfgutierrezg@unal.educ.co;A7777;7unal;7Estudiante;7Felipe;Vega;0000000007
+8lfgutierrezg@unal.educ.co;A8888;8unal;8Estudiante;8Felipe;Ariza;0000000008
+9lfgutierrezg@unal.educ.co;A9999;9unal;9Estudiante;9Felipe;Flechas;0000000009
