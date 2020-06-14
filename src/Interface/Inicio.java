@@ -5,7 +5,11 @@
  */
 package Interface;
 
+import Codigo.NewsSection;
+import java.awt.*;
+import javax.swing.*;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -14,23 +18,66 @@ import javax.swing.JPanel;
  */
 public class Inicio extends javax.swing.JPanel {
 
-    
-    Fauna fauna;
-    Flora flora;
-    Ecoparques ecoparques;
-    public Inicio(JFrame ventana){
+    Login login;
+    Registro registro;
+    InterFauna fauna;
+    InterFlora flora;
+    InterEcoparques ecoparques;
+    NewsSection noticias;
+    //
+    JLabel  buenas2=new JLabel();
+    JLabel  buenas1=new JLabel();
+    JLabel buenas=new JLabel();
+    ImageIcon  buenas3;
+    public Inicio(Ventana ventana,NewsSection noticias){
         initComponents();
         this.setBounds(0, 0, 1000, 800);
-        
-        fauna=new Fauna(ventana,this);
-        flora=new Flora(ventana,this);
-        ecoparques= new Ecoparques(ventana,this);
-
-        
+        registro=new Registro(ventana,this);
+        fauna=new InterFauna(ventana,this);
+        flora=new InterFlora(ventana,this);
+        ecoparques= new InterEcoparques(ventana,this);
+        login=new Login(ventana,this);
+        this.noticias=noticias;
+        IniciarNoticias();
+        //JLNoticias.setVisible(false);
         ventana.add(this);
         this.setVisible(true);
     }
 
+    private void IniciarNoticias(){
+        //JPNoticias.setLayout(null);
+        //JPNoticias.setBounds(0,150, 900,600);
+        //JPNoticias.setVisible(true);
+        
+        
+        buenas.setBounds(200,190,300,30);
+        buenas.setForeground(Color.white);
+        buenas.setOpaque(true);
+        buenas.setBackground(Color.green);
+        buenas.setFont( new Font("Ancizar Sans",Font.BOLD,25));
+        //JPNoticias.add(buenas);
+             
+        
+        buenas1.setBounds(200,220,500,40);
+        buenas1.setOpaque(true);
+        
+        buenas1.setForeground(Color.black);
+        
+        buenas1.setFont( new Font("Ancizar Sans",Font.PLAIN,15));
+             //JPNoticias.add(buenas1);
+             
+        
+        buenas2.setBounds(100,0,8000,300);
+             JPNoticias.add(buenas2);
+       buenas3= new ImageIcon(getClass().getResource("/Imagenes/"+noticias.printNewImage()));
+           buenas.setText(noticias.printNewTitle());
+           buenas.setVisible(true);
+           buenas1.setText(noticias.printNewDescript());
+           buenas1.setVisible(true);
+           buenas2.setIcon(new ImageIcon(buenas3.getImage().getScaledInstance(800, 300, Image.SCALE_SMOOTH)));
+           buenas2.setVisible(true);
+               
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,10 +92,9 @@ public class Inicio extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        JPNoticias = new javax.swing.JPanel();
+        next = new javax.swing.JLabel();
+        prev = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         JBRegistrarse = new javax.swing.JButton();
@@ -83,36 +129,55 @@ public class Inicio extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 44, 29));
         jLabel5.setText("A");
 
-        jPanel1.setBackground(new java.awt.Color(1, 1, 1));
+        JPNoticias.setBackground(new java.awt.Color(1, 1, 1));
+        JPNoticias.setPreferredSize(new java.awt.Dimension(1000, 300));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/inicio.png"))); // NOI18N
+        next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/next.png"))); // NOI18N
+        next.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nextMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nextMouseExited(evt);
+            }
+        });
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/next.png"))); // NOI18N
+        prev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/prev.png"))); // NOI18N
+        prev.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                prevMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                prevMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                prevMouseExited(evt);
+            }
+        });
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/prev.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout JPNoticiasLayout = new javax.swing.GroupLayout(JPNoticias);
+        JPNoticias.setLayout(JPNoticiasLayout);
+        JPNoticiasLayout.setHorizontalGroup(
+            JPNoticiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPNoticiasLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(188, 188, 188)
-                .addComponent(jLabel7)
+                .addComponent(prev, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(next)
+                .addGap(44, 44, 44))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        JPNoticiasLayout.setVerticalGroup(
+            JPNoticiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPNoticiasLayout.createSequentialGroup()
                 .addGap(132, 132, 132)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPNoticiasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(prev, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(131, 131, 131))
         );
 
@@ -128,6 +193,11 @@ public class Inicio extends javax.swing.JPanel {
         JBRegistrarse.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         JBRegistrarse.setText("Registrarse");
         JBRegistrarse.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
+        JBRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBRegistrarseActionPerformed(evt);
+            }
+        });
 
         JBLogin.setBackground(new java.awt.Color(231, 231, 231));
         JBLogin.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -181,11 +251,11 @@ public class Inicio extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JLEnterFaunaMouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                JLEnterFaunaMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 JLEnterFaunaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JLEnterFaunaMouseExited(evt);
             }
         });
 
@@ -197,7 +267,7 @@ public class Inicio extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(JPNoticias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +294,7 @@ public class Inicio extends javax.swing.JPanel {
                         .addComponent(JLEnterFauna)
                         .addGap(38, 38, 38)
                         .addComponent(LJEnterFlora)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(jLabel16)
@@ -264,7 +334,7 @@ public class Inicio extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JBRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JPNoticias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -281,12 +351,13 @@ public class Inicio extends javax.swing.JPanel {
                         .addComponent(JLEnterEcoparques)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel14)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBLoginActionPerformed
-        // TODO add your handling code here:
+    login.setVisible(true);
+    this.setVisible(false);
     }//GEN-LAST:event_JBLoginActionPerformed
 
     private void JLEnterFaunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLEnterFaunaMouseClicked
@@ -330,17 +401,52 @@ public class Inicio extends javax.swing.JPanel {
 
     }//GEN-LAST:event_JLEnterEcoparquesMouseExited
 
+    private void JBRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRegistrarseActionPerformed
+        this.setVisible(false);
+        registro.setVisible(true);
+    }//GEN-LAST:event_JBRegistrarseActionPerformed
+
+    private void prevMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevMouseEntered
+        prev.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 255, 0), 3, true));
+    }//GEN-LAST:event_prevMouseEntered
+
+    private void nextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMouseEntered
+        next.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 255, 0), 3, true));
+    }//GEN-LAST:event_nextMouseEntered
+
+    private void prevMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevMouseExited
+        prev.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+    }//GEN-LAST:event_prevMouseExited
+
+    private void nextMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMouseExited
+        next.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+    }//GEN-LAST:event_nextMouseExited
+
+    private void prevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevMouseClicked
+           noticias.prevPage();
+           buenas3= new ImageIcon(getClass().getResource("/Imagenes/"+noticias.printNewImage()));
+           //buenas.setText(noticias.printNewTitle());
+           //buenas1.setText(noticias.printNewDescript());
+           buenas2.setIcon(new ImageIcon(buenas3.getImage().getScaledInstance(800, 300, Image.SCALE_SMOOTH)));
+    }//GEN-LAST:event_prevMouseClicked
+
+    private void nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMouseClicked
+           noticias.nextPage();
+           buenas3= new ImageIcon(getClass().getResource("/Imagenes/"+noticias.printNewImage()));
+           //buenas.setText(noticias.printNewTitle());
+           //buenas1.setText(noticias.printNewDescript());
+           buenas2.setIcon(new ImageIcon(buenas3.getImage().getScaledInstance(800, 300, Image.SCALE_SMOOTH)));    }//GEN-LAST:event_nextMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBLogin;
     private javax.swing.JButton JBRegistrarse;
     private javax.swing.JLabel JLEnterEcoparques;
     private javax.swing.JLabel JLEnterFauna;
+    private javax.swing.JPanel JPNoticias;
     private javax.swing.JLabel LJEnterFlora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
@@ -348,8 +454,8 @@ public class Inicio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel next;
+    private javax.swing.JLabel prev;
     // End of variables declaration//GEN-END:variables
 }

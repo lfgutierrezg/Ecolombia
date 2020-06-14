@@ -18,7 +18,7 @@ public class UsuarioRegistrado {
     private String Profesion;
     private String Nombres;
     private String Apellidos;
-    private String id;
+    private int id;
 
     public UsuarioRegistrado(String correo, String password, 
             String institucion, String Profesion, String Nombres, String Apellidos,String id) {
@@ -29,7 +29,7 @@ public class UsuarioRegistrado {
         this.Profesion = Profesion;
         this.Nombres = Nombres;
         this.Apellidos = Apellidos;
-        this.id = id;
+        this.id =Integer.parseInt(id);
     }
 
     public String getCorreo() {
@@ -80,11 +80,11 @@ public class UsuarioRegistrado {
         this.Apellidos = Apellidos;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     

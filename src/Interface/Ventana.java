@@ -3,25 +3,50 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Interface;
+
+import Codigo.*;
+import Codigo.Eco_lombia;
+import Codigo.NewsSection;
+import Interface.Inicio;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 
 /**
  *
  * @author felipe-c4
  */
 public class Ventana extends javax.swing.JFrame {
-
-   
-    Inicio inicio= new Inicio (this);
-    public Ventana() {
+     public AVLUsuarios Usuarios;
+     public NewsSection noticias;
+     public DynamicArray<Flora> flora = new DynamicArray<>(10);
+     public DynamicArray<Fauna> fauna = new DynamicArray<>(10);
+     public DynamicArray<Ecoparque> ecoparque = new DynamicArray<>(10);
+     public Inicio inicio;
+    public Ventana(AVLUsuarios Usuarios,NewsSection noticias,DynamicArray<Flora> flora,DynamicArray<Fauna> fauna,DynamicArray<Ecoparque> ecoparque) {
         initComponents();
         this.setLayout(null);
         this.setLocationRelativeTo(null);
-//        this.add(inicio);
-//        inicio.setVisible(true);
-        this.setVisible(true);
+        this.Usuarios=Usuarios;
+        this.noticias=noticias; 
+        this.flora=flora;
+        this.fauna=fauna;
+        this.ecoparque=ecoparque;
+        
+        
+        Eco_lombia.insertarFaunas(this.fauna);
+        Eco_lombia.insertarFloras(this.flora);
+        Eco_lombia.insertarEcoparques(this.ecoparque);
+        Eco_lombia.InsetUsuarios(Usuarios);
+        this.inicio= new Inicio(this,noticias);
+        this.setVisible(true);   
     }
-
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,6 +60,14 @@ public class Ventana extends javax.swing.JFrame {
         setTitle("ECOLOMBIA");
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -50,41 +83,19 @@ public class Ventana extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Eco_lombia.exit(this.flora, this.ecoparque, this.fauna);
+        Eco_lombia.SalirUsuarios(this.Usuarios);
+
+
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Ventana().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

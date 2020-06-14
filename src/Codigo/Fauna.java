@@ -3,7 +3,9 @@ package Codigo;
 
 
 
+
 public class Fauna {
+    int id;
     String nombre_cientifico;
     String nombre_comun;
     String ubicacion;
@@ -16,8 +18,17 @@ public class Fauna {
     String alimentacion;
     String depredador;
     String especie;
+    int busquedas;
 
-    public Fauna(String nombre_cientifico, String nombre_comun, String ubicacion, String ecosistema, String filo, String clase, String orden, String familia, String genero, String alimentacion, String depredador, String especie) {
+    public Fauna(int busquedas){
+        this.busquedas=busquedas;
+    }
+    
+    
+    public Fauna(int id,String nombre_cientifico, String nombre_comun, String ubicacion, String ecosistema,
+            String filo, String clase, String orden, String familia, String genero, String alimentacion, 
+            String depredador, String especie) {
+        this.id=id;
         this.nombre_cientifico = nombre_cientifico;
         this.nombre_comun = nombre_comun;
         this.ubicacion = ubicacion;
@@ -30,22 +41,47 @@ public class Fauna {
         this.alimentacion = alimentacion;
         this.depredador = depredador;
         this.especie = especie;
+        this.busquedas=0;
     }
 
+//    @Override
+//    public String toString() {
+//        return "El nombre cientifico es "+ nombre_cientifico +
+//                "\nEl reino es Animalia"+
+//                "\nEl filo es "+ filo +
+//                "\nLa clase es "+ clase +
+//                "\nEl orden es " + orden +
+//                "\nLa familia es " + familia +
+//                "\nEl genero es " + genero + 
+//                "\nLa especie es " + especie +
+//                "\nHabita en el ecosistema de " + ecosistema +
+//                "\nSe ubica en " + ubicacion +
+//                "\nSe alimenta de " + alimentacion + 
+//                "\nEs depredado por " + depredador+
+//                "\nId: "+id;
+//    }
     @Override
     public String toString() {
-        return "El nombre cientifico es "+ nombre_cientifico +
-                "\nEl reino es Animalia"+
-                "\nEl filo es "+ filo +
-                "\nLa clase es "+ clase +
-                "\nEl orden es " + orden +
-                "\nLa familia es " + familia +
-                "\nEl genero es " + genero + 
-                "\nLa especie es " + especie +
-                "\nHabita en el ecosistema de " + ecosistema +
-                "\nSe ubica en " + ubicacion +
-                "\nSe alimenta de " + alimentacion + 
-                "\nEs depredado por " + depredador ;
+        return  nombre_cientifico +
+                ";"+ nombre_comun+
+                ";"+ filo +
+                ";"+ clase +
+                ";" + orden +
+                ";" + familia +
+                ";" + genero + 
+                ";" + especie +
+                ";" + ecosistema +
+                ";" + ubicacion +
+                ";" + alimentacion + 
+                ";" + depredador+
+                ";"+id;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre_cientifico() {

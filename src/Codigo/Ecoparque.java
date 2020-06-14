@@ -1,29 +1,52 @@
 package Codigo;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
-
+/**
+ *
  * @author danie
  */
 public class Ecoparque {
+    int id;
     String nombre;
     String ubicacion;
     String ecosistema;
     String interes;
+    int busquedas;
+   
+    public Ecoparque(int busquedas){
+        this.busquedas=busquedas;
+    }
     
-    public Ecoparque(String nombre, String ubicacion, String ecosistema, String interes) {
+    public Ecoparque(int id, String nombre, String ubicacion, String ecosistema, String interes) {
+        this.id=id;
         this.nombre = nombre;
         this.ubicacion = ubicacion;
         this.ecosistema = ecosistema;
         this.interes = interes;
+        this.busquedas=0;
     }
     
-    @Override
+//    @Override
+//    public String toString() {
+//        return "El Ecoparque "+ nombre + " Se encuentra ubicado en "+ ubicacion +" y posee el ecosistema de "+ ecosistema +""
+//                + " id: "+id;
+//    }
+    
+     @Override
     public String toString() {
-        return "El Ecoparque "+ nombre + " Se encuentra ubicado en "+ ubicacion +" y posee el ecosistema de "+ ecosistema;
+        return  nombre + ";"+ ubicacion +";"+ ecosistema +";"+interes+";"+id;
     }
+    
+    
+    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
     public String getNombre() {
         return nombre;

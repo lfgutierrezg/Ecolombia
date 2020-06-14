@@ -12,17 +12,26 @@ package Codigo;
  * @author danie
  */
 public class Flora {
-    private String nombre_cientifico;
-    private String nombre_comun;
-    private String ubicacion;
-    private String ecosistema;
-    private String filo;
-    private String clase;
-    private String orden;
-    private String familia;
-    private String genero;
-    private String especie;
-    public Flora(String nombre_cientifico, String nombre_comun, String ubicacion, String ecosistema, String filo, String clase, String orden, String familia, String genero,String especie) {
+    int id;
+     String nombre_cientifico;
+     String nombre_comun;
+     String ubicacion;
+     String ecosistema;
+     String filo;
+     String clase;
+     String orden;
+     String familia;
+     String genero;
+     String especie;
+    int busquedas;
+    
+     public Flora(int busquedas){
+        this.busquedas=busquedas;
+    }
+     
+    public Flora(int id,String nombre_cientifico, String nombre_comun, String ubicacion, String ecosistema, String filo, 
+            String clase, String orden, String familia, String genero,String especie) {
+        this.id=id;
         this.nombre_cientifico = nombre_cientifico;
         this.nombre_comun = nombre_comun;
         this.ubicacion = ubicacion;
@@ -33,21 +42,47 @@ public class Flora {
         this.familia = familia;
         this.genero = genero;
         this.especie = especie;
+        this.busquedas=0;
     }
-    @Override
+//    @Override
+//    public String toString() {
+//        return "El nombre cientifico es "+ nombre_cientifico +
+//                "\nEl reino es Animalia"+
+//                "\nEl filo es "+ filo +
+//                "\nLa clase es "+ clase +
+//                "\nEl orden es " + orden +
+//                "\nLa familia es " + familia +
+//                "\nEl genero es " + genero + 
+//                "\nLa especie es " + especie +
+//                "\nHabita en el ecosistema de " + ecosistema +
+//                "\nSe ubica en " + ubicacion+
+//                "\nId: "+ id;
+//    }
+  @Override
     public String toString() {
-        return "El nombre cientifico es "+ nombre_cientifico +
-                "\nEl reino es Animalia"+
-                "\nEl filo es "+ filo +
-                "\nLa clase es "+ clase +
-                "\nEl orden es " + orden +
-                "\nLa familia es " + familia +
-                "\nEl genero es " + genero + 
-                "\nLa especie es " + especie +
-                "\nHabita en el ecosistema de " + ecosistema +
-                "\nSe ubica en " + ubicacion;
+        return  nombre_comun+";"+ nombre_cientifico +
+                ";"+ filo +
+                ";"+ clase +
+                ";" + orden +
+                ";" + familia +
+                ";" + genero + 
+                ";" + especie +
+                ";" + ecosistema +
+                ";" + ubicacion+
+                ";"+ id;
+    }
+  
+    
+    
+    
+
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getNombre_cientifico() {
         return nombre_cientifico;
     }
