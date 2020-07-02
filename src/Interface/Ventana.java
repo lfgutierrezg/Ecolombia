@@ -19,13 +19,13 @@ import javax.swing.JFrame;
  * @author felipe-c4
  */
 public class Ventana extends javax.swing.JFrame {
-     public AVLUsuarios Usuarios;
+     public HashUsuario Usuarios;
      public NewsSection noticias;
      public DynamicArray<Flora> flora = new DynamicArray<>(10);
      public DynamicArray<Fauna> fauna = new DynamicArray<>(10);
      public DynamicArray<Ecoparque> ecoparque = new DynamicArray<>(10);
      public Inicio inicio;
-    public Ventana(AVLUsuarios Usuarios,NewsSection noticias,DynamicArray<Flora> flora,DynamicArray<Fauna> fauna,DynamicArray<Ecoparque> ecoparque) {
+    public Ventana(HashUsuario Usuarios,NewsSection noticias,DynamicArray<Flora> flora,DynamicArray<Fauna> fauna,DynamicArray<Ecoparque> ecoparque) {
         initComponents();
         this.setLayout(null);
         this.setLocationRelativeTo(null);
@@ -36,9 +36,9 @@ public class Ventana extends javax.swing.JFrame {
         this.ecoparque=ecoparque;
         
         
-        Eco_lombia.insertarFaunas(this.fauna);
-        Eco_lombia.insertarFloras(this.flora);
-        Eco_lombia.insertarEcoparques(this.ecoparque);
+       // Eco_lombia.insertarFaunas(this.fauna);
+        //Eco_lombia.insertarFloras(this.flora);
+       // Eco_lombia.insertarEcoparques(this.ecoparque);
         Eco_lombia.InsetUsuarios(Usuarios);
         this.inicio= new Inicio(this,noticias);
         this.setVisible(true);   

@@ -5,7 +5,9 @@
  */
 package Interface;
 
+import Codigo.Eco_lombia;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -14,6 +16,13 @@ import javax.swing.JPanel;
  */
 public class InterFauna extends javax.swing.JPanel {
     
+    boolean Btaxonomia=false;
+    boolean BEcosistema=false;
+    boolean BidRegistro=false;
+    boolean BUbicación=false;
+    boolean BNombreComun=false;
+    boolean BNombreCientifico=false;
+
     JPanel inicio;
     BusquedaResultados busquedaResultados;
     String ConcatLook=null;
@@ -34,7 +43,14 @@ public class InterFauna extends javax.swing.JPanel {
     }
 
     public void arranque(){
-        
+         Btaxonomia=false;
+         BEcosistema=false;
+         BidRegistro=false;
+         BUbicación=false;
+         BNombreComun=false;
+         BNombreCientifico=false;
+         
+         
         JCBEcosistema.setEnabled(false);
         JCBTaxonomia1.setEnabled(false);
         JCBUbicacion.setEnabled(false);
@@ -366,7 +382,7 @@ public class InterFauna extends javax.swing.JPanel {
 
     private void JRTaxonomiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRTaxonomiaActionPerformed
         arranque();
-        
+        Btaxonomia=true;
         JCBTaxonomia1.setEnabled(true);
     }//GEN-LAST:event_JRTaxonomiaActionPerformed
 
@@ -374,17 +390,20 @@ public class InterFauna extends javax.swing.JPanel {
         arranque();
         JCBEcosistema.setEnabled(true);
         JTFCriterio.setEditable(false);
+        BEcosistema=true;
     }//GEN-LAST:event_JREcosistemaActionPerformed
 
     private void JRIdRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRIdRegistroActionPerformed
          arranque();
          ConcatLook="IdRegistro";
+         BidRegistro=true;
     }//GEN-LAST:event_JRIdRegistroActionPerformed
 
     private void JRUbicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRUbicacionActionPerformed
         arranque();
         JCBUbicacion.setEnabled(true);
         JTFCriterio.setEditable(false);
+        BUbicación=true;
     }//GEN-LAST:event_JRUbicacionActionPerformed
 
     private void JTFCriterioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFCriterioActionPerformed
@@ -400,7 +419,47 @@ public class InterFauna extends javax.swing.JPanel {
 
     private void JBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBuscarActionPerformed
         busquedaResultados.busqueda(ConcatLook+"//"+JTFCriterio.getText());
-        busquedaResultados.fauna(ventana.fauna);
+        if(Btaxonomia){
+            switch(JCBTaxonomia1.getSelectedItem().toString()){
+                case "Filo":
+                    busquedaResultados.fauna(Eco_lombia.HeapSortFauna(Eco_lombia.busquedasFiloFauna(ventana.fauna,JTFCriterio.getText())));
+                    break;
+                case "Clase":
+                    busquedaResultados.fauna(Eco_lombia.HeapSortFauna(Eco_lombia.busquedasClaseFauna(ventana.fauna,JTFCriterio.getText())));
+                    break;
+                case "Orden":
+                    busquedaResultados.fauna(Eco_lombia.HeapSortFauna(Eco_lombia.busquedasOrdenFauna(ventana.fauna,JTFCriterio.getText())));
+                    break;
+                case "Familia":
+                    busquedaResultados.fauna(Eco_lombia.HeapSortFauna(Eco_lombia.busquedasFamiliaFauna(ventana.fauna,JTFCriterio.getText())));
+                    break;
+                case "Genero":
+                    busquedaResultados.fauna(Eco_lombia.HeapSortFauna(Eco_lombia.busquedasGeneroFauna(ventana.fauna,JTFCriterio.getText())));
+                    break;
+                case "Especie":
+                    busquedaResultados.fauna(Eco_lombia.HeapSortFauna(Eco_lombia.busquedasEspecieFauna(ventana.fauna,JTFCriterio.getText())));
+                    break;
+            
+            }
+            
+        }else if(BNombreCientifico){
+            busquedaResultados.fauna(Eco_lombia.HeapSortFauna(Eco_lombia.busquedaNombreCientificoFauna(ventana.fauna,JTFCriterio.getText())));
+        }else if(BNombreComun){
+             busquedaResultados.fauna(Eco_lombia.HeapSortFauna(Eco_lombia.busquedaNombreComunFauna(ventana.fauna,JTFCriterio.getText())));
+        }else if(BEcosistema){
+            busquedaResultados.fauna(Eco_lombia.busquedaEcosistemaFauna(ventana.fauna,JCBEcosistema.getSelectedItem().toString()));
+        }else if(BUbicación){
+            busquedaResultados.fauna(Eco_lombia.HeapSortFauna(Eco_lombia.busquedaUbicacionFauna(ventana.fauna,JCBUbicacion.getSelectedItem().toString())));
+        }else if(BidRegistro){
+            try {
+                 busquedaResultados.fauna(Eco_lombia.HeapSortFauna(Eco_lombia.busquedaFaunaId(ventana.fauna, Integer.parseInt(JTFCriterio.getText()))));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Id no valido");
+                arranque();
+                return;
+            }
+        }
+        
         busquedaResultados.setVisible(true);
         this.setVisible(false);
         arranque();
@@ -421,10 +480,12 @@ public class InterFauna extends javax.swing.JPanel {
 
     private void JRUNombreCientificoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRUNombreCientificoActionPerformed
         ConcatLook="Nombre Cientifico";
+        BNombreCientifico=true;
     }//GEN-LAST:event_JRUNombreCientificoActionPerformed
 
     private void JRNombreComunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRNombreComunActionPerformed
         ConcatLook="Nombre Comun";
+        BNombreComun=true;
     }//GEN-LAST:event_JRNombreComunActionPerformed
 
 

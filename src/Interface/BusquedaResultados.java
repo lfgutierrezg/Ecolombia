@@ -983,7 +983,7 @@ PagFauna = new PagerFauna(Fauna) ;
                nTitle.setFont( new Font("Ancizar Sans",Font.BOLD,20));
                nTitle.setText("Ubicación");
                 buenas1.setText("FAUNA");
-                
+                buenas1.setFont( new Font("Ancizar Sans",Font.BOLD,20));
                 
                 for(int i = 0; i < PagFauna.resPerPage;i++){
                     

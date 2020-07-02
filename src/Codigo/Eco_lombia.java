@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public class Eco_lombia {
 
  //////////////////////////////////////////////////   
-    public static void InsetUsuarios(AVLUsuarios Usuarios){
+ /* public static void InsetUsuarios(AVLUsuarios Usuarios){
         long inicio = System.currentTimeMillis();
 
         try{
@@ -43,9 +43,41 @@ public class Eco_lombia {
                                 long fin = System.currentTimeMillis();
                                 System.out.println("Inserción masiva"+(fin - inicio));
         
+    }*/
+    public static void InsetUsuarios(HashUsuario Usuarios){
+        long inicio = System.currentTimeMillis();
+
+        try{
+                                   String separador=System.getProperty("file.separator");
+                                   File f = new File("data"+separador+"Usuario10000.txt");
+                                   FileReader lectorArchivo=new FileReader(f);
+                                   BufferedReader br = new BufferedReader(lectorArchivo);
+                                   String l="";
+                                   String aux="";
+
+                                   while(true){
+                                       aux=br.readLine();
+                                       if(aux==null){
+                                           break;
+                                       }
+                                       String[] atributos=aux.split(",");
+                                       Usuarios.insert(new UsuarioRegistrado(atributos[0]
+                                           ,atributos[1],atributos[2],atributos[3],atributos[4],
+                                           atributos[5],atributos[6]));      
+                                       //System.out.println(atributos[0]);
+                                   } 
+                                   br.close();
+                                   lectorArchivo.close();
+                               }catch(Exception e){
+                                   System.out.println("error  "+e );
+                                   System.out.println(e.getMessage());
+                               }
+                                long fin = System.currentTimeMillis();
+                                System.out.println("Inserción masiva"+(fin - inicio));
+        
     }
     
-    public static void insertar(AVLUsuarios Usuarios,UsuarioRegistrado U){
+/*    public static void insertar(AVLUsuarios Usuarios,UsuarioRegistrado U){
 
                                     long inicio = System.currentTimeMillis();
                                     Usuarios.root=Usuarios.insert(Usuarios.root,U);
@@ -53,8 +85,7 @@ public class Eco_lombia {
                                      System.out.println("Inserción de un dato"+(fin - inicio));
         
     }
-    
-    public static void contraseñaCambio(AVLUsuarios Usuarios,String C1,String id){
+       public static void contraseñaCambio(AVLUsuarios Usuarios,String C1,String id){
                                         long inicio = System.currentTimeMillis();
                                         
                                         UsuarioRegistrado Ucambio=new UsuarioRegistrado(null
@@ -81,7 +112,7 @@ public class Eco_lombia {
                     null,id);
                 Ucambio=Usuarios.Find(Usuarios.root, Ucambio).key;
                 if(Ucambio==null){
-                    JOptionPane.showMessageDialog(null,"Usuario No encontrado");
+                    //JOptionPane.showMessageDialog(null,"Usuario No encontrado");
                 }else{
                     long fin = System.currentTimeMillis();
                      System.out.println("busqueda "+(fin - inicio));;
@@ -109,6 +140,70 @@ public class Eco_lombia {
                                long fin = System.currentTimeMillis();
                                long result=fin-inicio;
                                 System.out.println("Almacenado masiva"+(result));
+    }
+    
+    */
+    
+public static void insertar(HashUsuario Usuarios,UsuarioRegistrado U){
+
+                                    long inicio = System.currentTimeMillis();
+                                    Usuarios.insert(U);
+                                    long fin = System.currentTimeMillis();
+                                    System.out.println("Inserción de un dato"+(fin - inicio));
+        
+    }
+    
+    public static void contraseñaCambio(HashUsuario Usuarios,String C1,String id){
+                                        long inicio = System.currentTimeMillis();                                                                            
+                                        UsuarioRegistrado Ucambio=Usuarios.find(Integer.parseInt(id));
+                                        if(Ucambio==null){
+                                            System.out.println("Usuario No encontrado");
+                                        }else{
+                                            Ucambio.setPassword(C1);
+                                            System.out.println("Contraseña cambiada");
+                                            }
+                                            long fin = System.currentTimeMillis();
+                                             System.out.println("Actualización"+(fin - inicio));
+                               
+    }
+    
+    public static UsuarioRegistrado buscarXid(HashUsuario Usuarios,String id){
+                         
+                long inicio = System.currentTimeMillis();
+                
+                UsuarioRegistrado Ucambio=Usuarios.find(Integer.parseInt(id));
+                if(Ucambio==null){
+                    //JOptionPane.showMessageDialog(null,"Usuario No encontrado");
+                }else{
+                    long fin = System.currentTimeMillis();
+                     System.out.println("busqueda "+(fin - inicio));;
+                }
+                return Ucambio;
+
+    }
+    
+    public static void SalirUsuarios(HashUsuario Usuarios){
+        long inicio = System.currentTimeMillis();
+        try {
+        OutputStream       outputStream;
+         String separador=System.getProperty("file.separator");
+            File f = new File("data"+separador+"Salida.txt");
+            outputStream = new FileOutputStream(f.getAbsolutePath());
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+                for(int i=0;i<Usuarios.arraySize;i++){
+                    if(!(Usuarios.hashArray[i]==null)){
+                        outputStreamWriter.write(Usuarios.hashArray[i].getCorreo()+","+Usuarios.hashArray[i].getPassword()+","
+                        +Usuarios.hashArray[i].getInstitucion()+","+Usuarios.hashArray[i].getProfesion()+","+Usuarios.hashArray[i].getNombres() 
+                        +","+Usuarios.hashArray[i].getApellidos()+","+Usuarios.hashArray[i].getId()+"\n");
+                    }
+                }
+        outputStreamWriter.close();
+                               long fin = System.currentTimeMillis();
+                               long result=fin-inicio;
+                                System.out.println("Almacenado masiva"+(result));
+                                } catch (Exception ex) {
+                                        Logger.getLogger(Eco_lombia.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
     }
     //ESPECIES    
  ////////////////////////////////////////////////////////////////
@@ -141,10 +236,7 @@ public class Eco_lombia {
             JOptionPane.showMessageDialog(null,"Error no se pudo realizar el aporte");
             System.out.println(e);
         }
-    }
-  
-    
-    
+    }      
     public static DynamicArray buscarIdFlora(DynamicArray flora, int idb){
         long start;
         long end;
@@ -167,9 +259,6 @@ public class Eco_lombia {
         System.out.println(end-start);
         return finds;
     }
-
-    
-    
     public static DynamicArray buscarNombreCientificoFlora(DynamicArray flora, String nombre_cientifico){
         long start;
         long end;
@@ -508,6 +597,7 @@ public class Eco_lombia {
     public static DynamicArray busquedaUbicacionEcoparque(DynamicArray ecoparque,String ubicacion){
         long start;
         long end;
+        System.out.println(ubicacion);
         Ecoparque consulta_ecoparque;
         boolean exist=false;
         DynamicArray finds = new DynamicArray(10);
@@ -535,11 +625,11 @@ public class Eco_lombia {
         Ecoparque consulta_ecoparque;
         boolean exist=false;
         DynamicArray finds = new DynamicArray(10);
-        System.out.println("Introduzca el ecosistema actualizar");
+        //System.out.println("Introduzca el ecosistema actualizar");
         start=System.currentTimeMillis();
         for (int i=0;i<ecoparque.size();i++){
             consulta_ecoparque= (Ecoparque) ecoparque.value(i);
-            if(consulta_ecoparque.getUbicacion().equals(ecosistema)){
+            if(consulta_ecoparque.getEcosistema().equals(ecosistema)){
                 System.out.println(consulta_ecoparque.toString());
                 exist=true;
                 consulta_ecoparque.busquedas++;
@@ -567,7 +657,7 @@ public class Eco_lombia {
                 System.out.println(consulta_ecoparque.toString());
                 exist=true;
                 consulta_ecoparque.busquedas++;
-                ecoparque.push((Ecoparque)consulta_ecoparque);
+                finds.push((Ecoparque)consulta_ecoparque);
             }
         }
         if (! exist){
@@ -1236,7 +1326,7 @@ public class Eco_lombia {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader console = new BufferedReader (isr);
 
-        AVLUsuarios Usuarios = new AVLUsuarios();
+        HashUsuario Usuarios = new HashUsuario(11);
         NewsSection noticias=new NewsSection();
         
         DynamicArray<Flora> flora = new DynamicArray<>(10);

@@ -5,7 +5,9 @@
  */
 package Interface;
 
+import Codigo.Eco_lombia;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -14,11 +16,16 @@ import javax.swing.JPanel;
  */
 public class InterEcoparques extends javax.swing.JPanel {
     
+    boolean BInteres=false;
+    boolean BEcosistema=false;
+    boolean BidRegistro=false;
+    boolean BUbicación=false;
+    
+    
     JPanel inicio;
     BusquedaResultados busquedaResultados;
     String ConcatLook=null;
     Ventana ventana;
-    
     
     public InterEcoparques(Ventana ventana,JPanel inicio) {
         initComponents();
@@ -29,12 +36,14 @@ public class InterEcoparques extends javax.swing.JPanel {
         this.setVisible(false);
         this.setBounds(0, 0, 1000, 800);
         arranque();
-        
     }
 
-    
-    
     public void arranque(){
+        
+        BInteres=false;
+        BEcosistema=false;
+        BidRegistro=false;
+        BUbicación=false;
         
         JCBEcosistema.setEnabled(false);
         JCBInteres.setEnabled(false);
@@ -188,14 +197,14 @@ public class InterEcoparques extends javax.swing.JPanel {
             }
         });
 
-        JCBInteres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione ", "Caminatas", "Camping", "Deportes", "Planes" }));
+        JCBInteres.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione ", "Caminatas", "Camping", "Deportes", "Planes", "Investigacion", "Relajacion", "Turismo" }));
         JCBInteres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCBInteresActionPerformed(evt);
             }
         });
 
-        JCBUbicacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione ", "    Amazonas", "    Antioquia", "    Arauca", "    Atlántico", "    Bolívar", "    Boyacá", "    Caldas", "    Caquetá", "    Casanare", "    Cauca", "    Cesar", "    Chocó", "    Córdoba", "    Cundinamarca", "    Guainía", "    Guaviare", "    Huila", "    La Guajira", "    Magdalena", "    Meta", "    Nariño", "    Norte de Santander", "    Putumayo", "    Quindío", "    Risaralda", "    San Andrés y Providencia", "    Santander", "    Sucre", "    Tolima", "    Valle del Cauca", "    Vaupés", "    Vichada" }));
+        JCBUbicacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione ", "Amazonas", "Antioquia", "Arauca", "Atlántico", "Bolívar", "Boyaca", "Caldas", "Caquetá", "Casanare", "Cauca", "Cesar", "Chocó", "Córdoba", "Cundinamarca", "Guainía", "Guaviare", "Huila", "La Guajira", "Magdalena", "Meta", "Nariño", "Norte de Santander", "Putumayo", "Quindío", "Risaralda", "San Andrés y Providencia", "Santander", "Sucre", "Tolima", "Valle del Cauca", "Vaupés", "Vichada" }));
         JCBUbicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JCBUbicacionActionPerformed(evt);
@@ -307,7 +316,7 @@ public class InterEcoparques extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JRTaxonomia)
-                            .addComponent(JCBInteres, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                            .addComponent(JCBInteres))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JREcosistema)
@@ -317,7 +326,7 @@ public class InterEcoparques extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JRUbicacion)
-                            .addComponent(JCBUbicacion, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                            .addComponent(JCBUbicacion))
                         .addContainerGap(103, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
@@ -334,27 +343,30 @@ public class InterEcoparques extends javax.swing.JPanel {
         arranque();  
         JCBInteres.setEnabled(true);
         JTFCriterio.setEditable(false);
+        BInteres=true;
     }//GEN-LAST:event_JRTaxonomiaActionPerformed
 
     private void JREcosistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JREcosistemaActionPerformed
         arranque();
         JCBEcosistema.setEnabled(true);
         JTFCriterio.setEditable(false);
+        BEcosistema=true;
     }//GEN-LAST:event_JREcosistemaActionPerformed
 
     private void JRIdRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRIdRegistroActionPerformed
         arranque();
          ConcatLook="IdRegistro";
+         BidRegistro=true;
     }//GEN-LAST:event_JRIdRegistroActionPerformed
 
     private void JRUbicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRUbicacionActionPerformed
         arranque();
         JCBUbicacion.setEnabled(true);
         JTFCriterio.setEditable(false);
+        BUbicación=true;
     }//GEN-LAST:event_JRUbicacionActionPerformed
 
     private void JTFCriterioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFCriterioActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_JTFCriterioActionPerformed
 
     private void JBatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBatrasActionPerformed
@@ -366,8 +378,24 @@ public class InterEcoparques extends javax.swing.JPanel {
 
     private void JBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBuscarActionPerformed
          busquedaResultados.busqueda(ConcatLook+"//"+JTFCriterio.getText());
+        if(BInteres){
+            busquedaResultados.Ecoparques(Eco_lombia.HeapSortEcoparque(Eco_lombia.busquedaInteresEcoparque(ventana.ecoparque,JCBInteres.getSelectedItem().toString())));
+        }else if(BEcosistema){
+            busquedaResultados.Ecoparques(Eco_lombia.busquedaEcosistemaEcoparque(ventana.ecoparque,JCBEcosistema.getSelectedItem().toString()));
+        }else if(BUbicación){
+            busquedaResultados.Ecoparques(Eco_lombia.HeapSortEcoparque(Eco_lombia.busquedaUbicacionEcoparque(ventana.ecoparque,JCBUbicacion.getSelectedItem().toString())));
+        }else if(BidRegistro){
+            try {
+                 busquedaResultados.Ecoparques(Eco_lombia.HeapSortEcoparque(Eco_lombia.busquedaIdEcoparque(ventana.ecoparque, Integer.parseInt(JTFCriterio.getText()))));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Id no valido");
+                arranque();
+                return;
+            }
+        }
+        
         busquedaResultados.setVisible(true);
-        busquedaResultados.Ecoparques(ventana.ecoparque);
+        
         this.setVisible(false);
         arranque();
         BGOpcBusqueda.clearSelection();

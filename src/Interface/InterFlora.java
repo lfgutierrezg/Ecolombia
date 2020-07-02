@@ -403,6 +403,7 @@ public class InterFlora extends javax.swing.JPanel {
         JCBUbicacion.setEnabled(true);
         JTFCriterio.setEditable(false);
         BUbicación=true;
+        
     }//GEN-LAST:event_JRUbicacionActionPerformed
 
     private void JTFCriterioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFCriterioActionPerformed

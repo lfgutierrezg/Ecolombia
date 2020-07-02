@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -341,7 +342,6 @@ public class Registro extends javax.swing.JPanel {
     }//GEN-LAST:event_JTFNombresActionPerformed
 
     private void JBRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRegistrarseActionPerformed
-        System.out.println(revision());
         if(revision()){
             UsuarioRegistrado U=new UsuarioRegistrado(JTFcorreo.getText(), JPFcontrasena.getText(), 
             JTFInstitución.getText(), JTFProfesion.getText(), JTFNombres.getText(), JTFApellidos.getText(),JTFID.getText());
@@ -351,7 +351,7 @@ public class Registro extends javax.swing.JPanel {
             VolverInicio.setVisible(true);
             clean();
         }else{
-            
+           JOptionPane.showMessageDialog(null, "No es posible realizar el Registro"); 
         }
     }//GEN-LAST:event_JBRegistrarseActionPerformed
 
@@ -398,7 +398,10 @@ public class Registro extends javax.swing.JPanel {
          JOptionPane.showMessageDialog(null, "El id debe ser un numero");
          salida=false;
      }
-     
+         if(Eco_lombia.buscarXid(ventana.Usuarios,JTFID.getText())!=null){
+           JOptionPane.showMessageDialog(null, "El id ya esta registrado");
+           salida=false;
+         } 
      
      return salida;
  }
